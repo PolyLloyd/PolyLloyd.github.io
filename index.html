@@ -26,25 +26,10 @@
     color: var(--text);
     font-family: 'Space Mono', monospace;
     overflow-x: hidden;
-    cursor: none;
+  
   }
 
-  .cursor {
-    position: fixed; width: 14px; height: 14px;
-    background: var(--red-bright); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, width 0.2s, height 0.2s;
-    mix-blend-mode: difference;
-  }
-  .cursor-trail {
-    position: fixed; width: 34px; height: 34px;
-    border: 1px solid var(--red); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: left 0.12s ease, top 0.12s ease;
-    opacity: 0.5;
-  }
+
 
   body::before {
     content: '';
@@ -284,6 +269,8 @@
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
+  a, .soc-card, .q-card, button { cursor: pointer; }
+
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--black); }
   ::-webkit-scrollbar-thumb { background: var(--red-dim); }
@@ -306,8 +293,8 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-trail" id="cursorTrail"></div>
+
+
 
 <nav>
   <div class="nav-logo">LLOYD<span>!!</span></div>
@@ -455,16 +442,7 @@
 </footer>
 
 <script>
-  const cursor = document.getElementById('cursor');
-  const trail  = document.getElementById('cursorTrail');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
-    trail.style.left  = e.clientX + 'px'; trail.style.top  = e.clientY + 'px';
-  });
-  document.querySelectorAll('a, .soc-card, .q-card').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.width = '24px'; cursor.style.height = '24px'; });
-    el.addEventListener('mouseleave', () => { cursor.style.width = '14px'; cursor.style.height = '14px'; });
-  });
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
